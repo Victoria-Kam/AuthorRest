@@ -22,18 +22,41 @@ public class NoteRepository {
 
     public List<Note> getAll() {
 
-        String sql = "select note.title, note.content, note.date , author.nickname from note inner join author on note.idauthor = author.idauthor";
+        //String sql = "select note.title, note.content, note.date , author.nickname from note inner join author on note.idauthor = author.idauthor";
+
+        String sql = "select * from note";
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
         TypedQuery<Note> query = session.createNativeQuery(sql);
         return query.getResultList();
     }
 
 
-   /* public void addNote(Note note) {
+   public void addNote(Note note) {
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
-        note.setAuthor(findAuthor(note.getAuthorName()));
         session.save(note);
-    }*/
+    }
+
+
+    public Note getOne(long id){
+        Session session = sessionFactory.getCurrentSession();
+        return session.get(Note.class, id);
+    }
+
+
+    public void update(long id, Note note){
+        Session session = sessionFactory.getCurrentSession();
+        note.setIdNote(id);
+        session.update(note);
+    }
+
+    public void delete(long id){
+        Session session = sessionFactory.getCurrentSession();
+        Note note = session.find(Note.class,id);
+        session.delete(note);
+    }
+
+
+
 
 
     private List<Author> findAuthor(String authorName) {
@@ -43,10 +66,4 @@ public class NoteRepository {
         TypedQuery<Author> query = session.createNativeQuery(sql);
         return query.getResultList();
     }
-
-    public Note getOne(long id){
-        Session session = sessionFactory.getCurrentSession();
-        return session.get(Note.class, id);
-    }
-
 }

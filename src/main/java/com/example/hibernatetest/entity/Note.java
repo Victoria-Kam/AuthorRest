@@ -21,9 +21,10 @@ public class Note {
     @Column(name = "date")
     private String dateTime;
 
-   /* @Column(name = "idnote")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Author> author;*/
+   //@Column(name = "idauthor")
+   // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+   // private Collection<Author> author;
+   //private long idAuthor;
 
     @Transient
     private String authorName;

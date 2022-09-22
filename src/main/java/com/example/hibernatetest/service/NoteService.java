@@ -21,20 +21,20 @@ public class NoteService {
         return repository.getAll();
     }
 
-    /*public void addNote(Note note){
+    public void addNote(Note note){
         repository.addNote(note);
-    }*/
+    }
 
     public Note getOne(long id){
         return repository.getOne(id);
     }
 
 
-    /*public void update(Note note){
-        repository.update(author);
+    public void update(long id, Note note){
+        repository.update(id,note);
     }
 
-    public void delete(Note note){
-        repository.delete(author);
-    }*/
+    public void delete(long id){
+        repository.delete(id);
+    }
 }

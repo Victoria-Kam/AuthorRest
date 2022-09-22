@@ -22,19 +22,29 @@ public class NoteController {
 
     @GetMapping("/")
     public List<Note> getAll(){
-
         return noteService.getAll();
     }
-
-   /* @PostMapping("/add-note")
-    public String saveAuthor(@RequestBody Note note){
-        noteService.addNote(note);
-
-        return "save!";
-    }*/
 
     @GetMapping("/{id}")
     public Note getOne(@PathVariable long id){
         return noteService.getOne(id);
+    }
+
+    @PostMapping("/add-note")
+    public String saveNote(@RequestBody Note note){
+        noteService.addNote(note);
+        return "save!";
+    }
+
+    @PutMapping("/change-note/{id}")
+    public String changeNote(@PathVariable long id, @RequestBody Note note){
+        noteService.update(id,note);
+        return "change!";
+    }
+
+    @DeleteMapping("/delete-note/{id}")
+    public String deleteNote(@PathVariable long id){
+        noteService.delete(id);
+        return "deleted!";
     }
 }
