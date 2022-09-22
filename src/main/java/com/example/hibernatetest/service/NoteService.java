@@ -21,9 +21,9 @@ public class NoteService {
         return repository.getAll();
     }
 
-    public void addNote(Note note){
+    /*public void addNote(Note note){
         repository.addNote(note);
-    }
+    }*/
 
     public Note getOne(long id){
         return repository.getOne(id);

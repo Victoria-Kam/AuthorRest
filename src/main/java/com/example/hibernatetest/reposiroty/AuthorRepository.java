@@ -22,7 +22,7 @@ public class AuthorRepository {
         this.sessionFactory = sessionFactory;
     }
 
-    public List<Author> getAll(){
+    public List<Author> getAll() {
 
         String sql = "select * from author";
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
@@ -30,29 +30,29 @@ public class AuthorRepository {
         return query.getResultList();
     }
 
-    public void save(Author author){
+    public void save(Author author) {
         Session session = sessionFactory.getCurrentSession();
         session.save(author); // вот так вот можно сохранить в БД
     }
 
 
-    public Author getOne(long id){
+    public Author getOne(long id) {
         Session session = sessionFactory.getCurrentSession();
         return session.get(Author.class, id);
     }
 
 
-
-    /*public void update(Author author){
+    public void update(Author author, long id) {
         Session session = sessionFactory.getCurrentSession();
+        author.setIdAuthor(id);
         session.update(author);
-    }*/
-
-    public void delete(long id){
-
-        String sql = "DELETE from author";
-        Session session = sessionFactory.getCurrentSession();
-        TypedQuery query = session.createQuery(sql);
-        query.setParameter("idauthor",id);
     }
+
+    public void delete(long id) {
+
+        Session session = sessionFactory.getCurrentSession();
+        Author author = session.find(Author.class, id);
+        session.delete(author);
+    }
+
 }

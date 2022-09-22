@@ -26,12 +26,12 @@ public class NoteController {
         return noteService.getAll();
     }
 
-    @PostMapping("/add-note")
+   /* @PostMapping("/add-note")
     public String saveAuthor(@RequestBody Note note){
         noteService.addNote(note);
 
         return "save!";
-    }
+    }*/
 
     @GetMapping("/{id}")
     public Note getOne(@PathVariable long id){

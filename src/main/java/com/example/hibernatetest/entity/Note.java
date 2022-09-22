@@ -21,9 +21,9 @@ public class Note {
     @Column(name = "date")
     private String dateTime;
 
-    @Column(name = "idnote")
+   /* @Column(name = "idnote")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Collection<Author> author;
+    private Collection<Author> author;*/
 
     @Transient
     private String authorName;
@@ -67,12 +67,12 @@ public class Note {
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
-
+/*
     public Collection<Author> getAuthor() {
         return author;
     }
 
     public void setAuthor(Collection<Author> author) {
         this.author = author;
-    }
+    }*/
 }

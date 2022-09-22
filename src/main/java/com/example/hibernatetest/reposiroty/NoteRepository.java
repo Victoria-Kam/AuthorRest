@@ -29,11 +29,11 @@ public class NoteRepository {
     }
 
 
-    public void addNote(Note note) {
+   /* public void addNote(Note note) {
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
         note.setAuthor(findAuthor(note.getAuthorName()));
         session.save(note);
-    }
+    }*/
 
 
     private List<Author> findAuthor(String authorName) {
