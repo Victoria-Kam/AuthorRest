@@ -22,9 +22,9 @@ public class NoteRepository {
 
     public List<Note> getAll() {
 
-        //String sql = "select note.title, note.content, note.date , author.nickname from note inner join author on note.idauthor = author.idauthor";
+        String sql = "select note.title, note.content, note.date , author.nickname from note inner join author on note.idauthor = author.idauthor";
 
-        String sql = "select * from note";
+        //String sql = "select * from note";
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
         TypedQuery<Note> query = session.createNativeQuery(sql);
         return query.getResultList();
@@ -33,6 +33,7 @@ public class NoteRepository {
 
    public void addNote(Note note) {
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
+        note.setAuthor(findAuthor(note.getAuthorID()));
         session.save(note);
     }
 
@@ -59,11 +60,12 @@ public class NoteRepository {
 
 
 
-    private List<Author> findAuthor(String authorName) {
+    private Author findAuthor(long id) {
 
-        String sql = "select * from author where nickname = '" + authorName + "'";
+       /* String sql = "select * from author where nickname = '" + authorName + "'";
         Session session = sessionFactory.getCurrentSession();   // открываем сессию
-        TypedQuery<Author> query = session.createNativeQuery(sql);
-        return query.getResultList();
+        TypedQuery<Author> query = session.createNativeQuery(sql);*/
+        Session session = sessionFactory.getCurrentSession();
+        return session.find(Author.class,id);
     }
 }

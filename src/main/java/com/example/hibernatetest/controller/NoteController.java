@@ -1,6 +1,5 @@
 package com.example.hibernatetest.controller;
 
-import com.example.hibernatetest.entity.Author;
 import com.example.hibernatetest.entity.Note;
 import com.example.hibernatetest.service.NoteService;
 import org.springframework.beans.factory.annotation.Autowired;

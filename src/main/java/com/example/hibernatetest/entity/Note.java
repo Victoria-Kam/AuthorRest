@@ -21,20 +21,19 @@ public class Note {
     @Column(name = "date")
     private String dateTime;
 
-   //@Column(name = "idauthor")
-   // @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-   // private Collection<Author> author;
-   //private long idAuthor;
+    @ManyToOne
+    @JoinColumn(name = "idauthor", nullable = false)
+    private Author author;
 
     @Transient
-    private String authorName;
+    private long authorID;
 
-    public String getAuthorName() {
-        return authorName;
+    public long getAuthorID() {
+        return authorID;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setAuthorID(long authorID) {
+        this.authorID = authorID;
     }
 
     public long getIdNote() {
@@ -68,12 +67,12 @@ public class Note {
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
-/*
-    public Collection<Author> getAuthor() {
+
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(Collection<Author> author) {
+    public void setAuthor(Author author) {
         this.author = author;
-    }*/
+    }
 }

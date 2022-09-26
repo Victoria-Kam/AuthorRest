@@ -1,7 +1,9 @@
 package com.example.hibernatetest.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "author")
@@ -21,6 +23,18 @@ public class Author {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+   // @JoinColumn(name = "idauthor")
+    private Set<Note> notes;
+
+
+    public Set<Note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<Note> notes) {
+        this.notes = notes;
+    }
 
     public long getIdAuthor() {
         return idAuthor;
