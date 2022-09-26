@@ -24,7 +24,6 @@ public class Author {
     private String email;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-   // @JoinColumn(name = "idauthor")
     private Set<Note> notes;
 
 
