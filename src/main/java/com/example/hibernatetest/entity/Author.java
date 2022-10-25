@@ -26,6 +26,13 @@ public class Author {
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private Set<Note> notes;
 
+    @ManyToOne
+    @JoinColumn(name = "idrole", nullable = false)
+    private Role role;
+
+
+    @Column(name = "password", nullable = false)
+    private String password;
 
     public Set<Note> getNotes() {
         return notes;
@@ -67,5 +74,19 @@ public class Author {
         this.email = email;
     }
 
+    public Role getRole() {
+        return role;
+    }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

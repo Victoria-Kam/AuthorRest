@@ -2,6 +2,7 @@ package com.example.hibernatetest.reposiroty;
 
 import com.example.hibernatetest.entity.Author;
 import com.example.hibernatetest.entity.Note;
+import com.example.hibernatetest.reposiroty.Interface.IAuthorRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -30,9 +31,10 @@ public class AuthorRepository {
         return query.getResultList();
     }
 
-    public void save(Author author) {
+    public Author save(Author author) {
         Session session = sessionFactory.getCurrentSession();
         session.save(author); // вот так вот можно сохранить в БД
+        return author;
     }
 
 
