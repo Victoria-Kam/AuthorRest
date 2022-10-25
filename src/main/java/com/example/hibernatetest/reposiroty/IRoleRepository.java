@@ -1,4 +1,4 @@
-package com.example.hibernatetest.reposiroty.Interface;
+package com.example.hibernatetest.reposiroty;
 
 import com.example.hibernatetest.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

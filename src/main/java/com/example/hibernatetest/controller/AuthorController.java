@@ -1,13 +1,16 @@
 package com.example.hibernatetest.controller;
 
 import com.example.hibernatetest.entity.Author;
-import com.example.hibernatetest.entity.Note;
 import com.example.hibernatetest.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -28,8 +31,8 @@ public class AuthorController {
         return service.getAll();
     }
 
-    @GetMapping("/{id}")
-    public Author getAuthor(@PathVariable long id) {
+   @GetMapping("/{id}")
+    public Optional<Author> getAuthor(@PathVariable long id) {
         return service.getOne(id);
     }
 
@@ -39,45 +42,44 @@ public class AuthorController {
      * session.get(Author.class, id);
      */
 
-    @GetMapping("/notes/{id}")
+   /* @GetMapping("/notes/{id}")
     public List<Note> getNotes(@PathVariable long id){
         return service.getNotes(id);
-    }
+    }*/
 
     @PostMapping("/save")
+    @PreAuthorize("hasAnyRole('ROLE_AUTHOR', 'ROLE_ADMIN')")
     public String saveAuthor(@RequestBody Author author) {
         service.save(author);
         return "save!";
     }
 
-    /**
-     * тут передаю самого автора. Далее просто в автора сохраняю через сессию
-     * session.save(author);
-     */
 
-
-    @PutMapping("/change/{id}")
-    public String changeAuthor(@PathVariable long id, @RequestBody Author author) {
-        service.update(author, id);
-        return "change!";
+    @PutMapping("/change")
+    @PreAuthorize("hasAnyRole('ROLE_AUTHOR', 'ROLE_ADMIN')")
+    public ResponseEntity<String> changeAuthor(@PathVariable long id, @RequestBody Author author) {
+        Optional<Author> optionalAuthor = service.getOne(id);
+        if(optionalAuthor.isEmpty()){
+            return new ResponseEntity<>("Author not found", HttpStatus.NOT_FOUND);
+        }
+        Author dbArtist = optionalAuthor.get();
+        dbArtist.setNickName(dbArtist.getNickName());
+        service.update(dbArtist);
+        return new ResponseEntity<>("Author was updated", HttpStatus.OK);
     }
-
-    /**
-     * тут передаю как самого автора, так и его ID. Далее просто в автора добавляю его ID и обновляю.
-     * author.setIdAuthor(id);
-     */
 
 
     @DeleteMapping("/{id}")
-    public String deleteAuthor(@PathVariable long id) {
-        service.delete(id);
-        return "deleted";
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<String> deleteAuthor(@PathVariable long id) {
+        Optional<Author> optionalAuthor = service.getOne(id);
+        if(optionalAuthor.isEmpty()){
+            return new ResponseEntity<>("Author not found", HttpStatus.NOT_FOUND);
+        }
+        Author dbArtist = optionalAuthor.get();
+        service.delete(dbArtist);
+        return new ResponseEntity<>("Author was deleted", HttpStatus.NO_CONTENT);
     }
-    /**
-     * тут передаю ID автора, которого буду удалять.
-     * После передачи ID в сессии ищу объект(автора), у которого есть этот ID:
-     * Author author = session.find(Author.class, id);
-     * */
 
 
 }

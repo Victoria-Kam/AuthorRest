@@ -14,13 +14,13 @@ public class Author {
     @Column(name = "idauthor")
     private long idAuthor;
 
-    @Column(name = "nickname", nullable = false)
+    @Column(name = "nickname")
     private String nickName;
 
-    @Column(name = "age", nullable = false)
+    @Column(name = "age")
     private int age;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)

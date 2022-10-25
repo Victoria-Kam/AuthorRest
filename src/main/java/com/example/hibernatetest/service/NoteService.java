@@ -1,7 +1,7 @@
 package com.example.hibernatetest.service;
-
+/*
 import com.example.hibernatetest.entity.Note;
-import com.example.hibernatetest.reposiroty.NoteRepository;
+import com.example.hibernatetest.reposiroty.INoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,10 +10,10 @@ import java.util.List;
 @Service
 public class NoteService {
 
-    private final NoteRepository repository;
+    private final INoteRepository repository;
 
     @Autowired
-    public NoteService(NoteRepository repository) {
+    public NoteService(INoteRepository repository) {
         this.repository = repository;
     }
 
@@ -37,4 +37,4 @@ public class NoteService {
     public void delete(long id){
         repository.delete(id);
     }
-}
+}*/
